@@ -155,7 +155,7 @@ function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParag
   const articleSpan = document.createElement("span");
   articleSpan.innerText = "+"
   articleSpan.classList.add("expandButton");
-  articleSpan.addEventListener("click", (event) => {
+  articleSpan.addEventListener("click", () => {
     // console.log(`event type: ${event.type}`);
     articleContainer.classList.toggle("article-open");  
   })

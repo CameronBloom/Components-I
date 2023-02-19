@@ -90,6 +90,23 @@ const data = [
   }
 ];
 
+data.push({
+  title: "My First Article",
+  date: "Saturday, February 18th, 2023",
+  firstParagraph: "First Paragraph",
+  secondParagraph: "Second Paragraph",
+  thirdParagraph: "Third Paragraph",
+})
+
+data.push({
+  title: "My Second Article",
+  date: "Saturday, February 18th, 2023",
+  firstParagraph: "First Paragraph",
+  secondParagraph: "Second Paragraph",
+  thirdParagraph: "Third Paragraph",
+})
+
+
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
@@ -115,3 +132,47 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParagraph }) {
+  const articleContainer = document.createElement("div"); 
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  articleContainer.appendChild(articleTitle);
+  articleContainer.appendChild(articleDate);
+  articleContainer.classList.add("article");
+  articleTitle.innerText = title;
+  articleDate.innerText = date;
+  articleDate.classList.add("date");
+
+
+  const articleFirst = document.createElement("p");
+  const articleSecond = document.createElement("p");
+  const articleThird = document.createElement("p");
+  articleFirst.innerText = firstParagraph;
+  articleSecond.innerText = secondParagraph;
+  articleThird.innerText = thirdParagraph;
+  
+  const articleSpan = document.createElement("span");
+  articleSpan.innerText = "+"
+  articleSpan.classList.add("expandButton");
+  articleSpan.addEventListener("click", (event) => {
+    // console.log(`event type: ${event.type}`);
+    articleContainer.classList.toggle("article-open");  
+  })
+
+  articleContainer.appendChild(articleFirst);
+  articleContainer.appendChild(articleSecond);
+  articleContainer.appendChild(articleThird);
+  articleContainer.appendChild(articleSpan);
+
+  return articleContainer;
+}
+
+const articles = data.map((article) => {
+  return articleMaker(article)
+})
+
+const articlesContainers = document.querySelector(".articles");
+articles.forEach((item) => {
+  articlesContainers.appendChild(item);
+})
